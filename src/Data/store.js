@@ -1,6 +1,16 @@
 import { createStore, combineReducers } from 'redux';
 
-const allPosts = (state = [], action) => {
+const allPosts = (state = [
+    {
+        id: 1,
+        title: "Titulo del post en store",
+        body: "Cuerpo del post"
+    },
+    {
+        id: 2,
+        title: "Titulo del segundo post en store",
+        body: "Cuerpo del post"
+    }], action) => {
     var nuevoEstado = Object.assign({}, state);
 
     switch (action.type) {
