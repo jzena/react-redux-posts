@@ -23,8 +23,9 @@ const repo = `/${window.location.pathname.split('/')[1]}`;
 
 const App = () => {
     return (
-        // <Router basename={repo}> 
-        <Router>
+        //<Router> 
+        <Router basename={repo}>
+
             <div>
                 <Header />
                 <Route exact path="/" component={Home} />

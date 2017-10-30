@@ -31,6 +31,20 @@ const userCreated = (state = {}, action) => {
     }
 }
 
+const session = (state = null, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'LOGIN':
+            nuevoEstado = action.data;
+            return nuevoEstado;
+        case 'LOGOUT':
+            nuevoEstado = null;
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
