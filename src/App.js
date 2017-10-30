@@ -20,12 +20,11 @@ const Header = () => {
     )
 }
 const repo = `/${window.location.pathname.split('/')[1]}`;
-const repoAll = `/${window.location.pathname}`;
-console.log(repo);
-console.log(repoAll);
+
 const App = () => {
     return (
-        <Router basename={repo}>
+        // <Router basename={repo}> 
+        <Router>
             <div>
                 <Header />
                 <Route exact path="/" component={Home} />
