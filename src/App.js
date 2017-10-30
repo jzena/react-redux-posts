@@ -19,10 +19,13 @@ const Header = () => {
         </nav>
     )
 }
-
+const repo = `/${window.location.pathname.split('/')[1]}`;
+const repoAll = `/${window.location.pathname}`;
+console.log(repo);
+console.log(repoAll);
 const App = () => {
     return (
-        <Router>
+        <Router basename={repo}>
             <div>
                 <Header />
                 <Route exact path="/" component={Home} />
