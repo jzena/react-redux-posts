@@ -1,20 +1,56 @@
 import React from 'react';
-import ContactForm from './Form';
-//import SignupFormV from './SignupFormV.js';
 import SignupFormFinal from './SignupFormFinal';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import {reset} from 'redux-form';
 
-const Signup = () => {
+
+const Signup = (props) => {
     const funcionForma = (datos) => {
         console.log(datos);
+        axios.post('https://blog-api-u.herokuapp.com/users/', {
+            user: {
+                name: datos.username,
+                email: datos.email,
+                password: datos.password,
+                password_confirmation: datos.password_confirmation
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                props.success();
+            })
+            .catch(function (error) {
+                console.log(error);
+                props.error();
+            });
     }
     return (
         <div>
             <h2>Sign Up</h2>
-            {/* <ContactForm onSubmit={funcionForma} /> */}
-            {/* <SignupFormV onSubmit={funcionForma} /> */}
+            <br/>
+            {props.mensaje.mensaje}
+            <br/>
             {<SignupFormFinal onSubmit={funcionForma} />}
         </div>
     );
 };
+const mapStateToProps = (state) => {
+    return {
+        mensaje: state.userStatus
+    }
+}
 
-export default Signup;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        success: () => {
+            dispatch({ type: 'USER_CREATED' });
+            dispatch(reset('SignupValidation'));
+        },
+        error: () => {
+            dispatch({ type: 'USER_ERROR' });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

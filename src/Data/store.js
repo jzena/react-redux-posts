@@ -17,8 +17,23 @@ const allPosts = (state = [], action) => {
     }
 }
 
+const userCreated = (state = {}, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'USER_CREATED':
+            nuevoEstado = { mensaje: "El uauario se creó con exito" }
+            return nuevoEstado;
+        case 'USER_ERROR':
+            nuevoEstado = { mensaje: "El uauario no se creó" }
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
+    userStatus: userCreated,
     form: formReducer
 });
 
