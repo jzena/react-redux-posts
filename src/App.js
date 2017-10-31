@@ -39,8 +39,8 @@ const App = (props) => {
         )
     } else {
         return (
-            //<Router basename={repo}>
-            <Router>
+            //<Router>
+            <Router basename={repo}>            
                 <div>
                     <Header />
                     <Route exact path="/" component={Home} />
