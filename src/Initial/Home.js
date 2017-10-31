@@ -19,9 +19,15 @@ import axios from 'axios';
 
 //// Componente derivado de una clase
 class Home extends Component {
-
-    componentDidMount() {
-        this.props.dispatch1();
+    constructor() {
+        super()
+        this.state = {
+            loading: true
+        }
+    }
+    async componentDidMount() {
+        await this.props.dispatch1();
+        this.setState({ loading: false });
     }
 
     componentWillUnmount() {
@@ -38,9 +44,12 @@ class Home extends Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return <h4>Loading...</h4>
+        }
         return (
             <div>
-                <h2>Homa desde el nuevo Componente</h2>
+                <h2>Home desde el nuevo Componente</h2>
                 {this.allPosts()}
             </div>
         )
@@ -54,9 +63,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatch1: () => {
+        dispatch1: async () => {
             //dispatch(actionCreator)
-            axios.get('https://blog-api-u.herokuapp.com/v1/posts')
+            await axios.get('https://blog-api-u.herokuapp.com/v1/posts')
                 .then(function (response) {
                     console.log(response);
                     dispatch({
