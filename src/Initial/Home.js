@@ -26,8 +26,13 @@ class Home extends Component {
         }
     }
     async componentDidMount() {
+        this.initialFetch();
+    }
+
+    async initialFetch() {
         await this.props.dispatch1();
         this.setState({ loading: false });
+
     }
 
     componentWillUnmount() {
