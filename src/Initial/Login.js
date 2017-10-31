@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Login = (props) => {
 
     const funcProps = () => {
-        console.log(props.own)
+        //console.log(props.own)
     }
 
     const funcionForma = (datos) => {

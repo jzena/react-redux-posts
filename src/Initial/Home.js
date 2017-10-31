@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Pagination from '../Pagination';
 
+import { Link } from 'react-router-dom';
 
 //// Componente sin estado
 // const Home = (props) => {
@@ -44,7 +45,9 @@ class Home extends Component {
     allPosts = () => {
         const Posts = this.props.allPosts.map((post) => {
             return (
-                <h4 key={post.id}>{post.title}</h4>
+                <Link to={`/post/${post.id}`} key={post.id}>
+                    <h4 key={post.id}>{post.title}</h4>
+                </Link>
             )
         });
         return Posts;

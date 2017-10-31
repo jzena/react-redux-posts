@@ -59,10 +59,38 @@ const pagination = (state = { total: 1, page: 1 }, action) => {
     }
 }
 
+const showPost = (state = {}, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'GET_POST':
+            nuevoEstado = action.data;
+            return nuevoEstado;
+        case 'CLEAR_POST':
+            nuevoEstado = {};
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
+const errorPost = (state = null, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'ERROR_GET_POST':
+            nuevoEstado = "Error al cargar el post";
+            return nuevoEstado;
+        default:
+            return null;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
     pagination: pagination,
+    login: session,
+    showPost: showPost,
+    errorPost: errorPost,
     form: formReducer
 });
 

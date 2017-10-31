@@ -8,7 +8,10 @@ import {
 import Home from './Initial/Home';
 import Login from './Initial/Login';
 import Signup from './Initial/Signup';
+import Post from './Initial/Post';
+import AHeader from './Auth/AHeader';
 
+import { connect } from 'react-redux';
 
 const Header = () => {
     return (
@@ -21,20 +24,47 @@ const Header = () => {
 }
 const repo = `/${window.location.pathname.split('/')[1]}`;
 
-const App = () => {
-    return (
-        //<Router> 
-        <Router basename={repo}>
+const App = (props) => {
+    console.log(props.login);
+    if (props.login != null) {
+        return (
+            <Router>
+                <div>
+                    <AHeader />
+                    <h2>auth</h2>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/post/:id" component={Post} />
+                </div>
+            </Router>
+        )
+    } else {
+        return (
+            //<Router basename={repo}>
+            <Router>
+                <div>
+                    <Header />
+                    <Route exact path="/" component={Home} />
+                    <Route path="/signup" component={Signup} />
+                    <Route path="/login" component={Login} />
+                    <Route exact path="/post/:id" component={Post} />
+                    <h2>Dentro de App..</h2>
+                </div>
+            </Router>
+        )
+    }
 
-            <div>
-                <Header />
-                <Route exact path="/" component={Home} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/login" component={Login} />
-                <h2>Dentro de App..</h2>
-            </div>
-        </Router>
-    )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        login: state.login
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch1: () => {
+            //dispatch(actionCreator)
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)
