@@ -24,10 +24,10 @@ const userCreated = (state = {}, action) => {
             nuevoEstado = { mensaje: "El uauario se creó con exito" }
             return nuevoEstado;
         case 'USER_ERROR':
-            nuevoEstado = { mensaje: "El uauario no se creó" }
+            nuevoEstado = { mensaje: "El uauario no se creó o los datos no son correctos" }
             return nuevoEstado;
         default:
-            return state;
+            return {};
     }
 }
 
@@ -45,9 +45,24 @@ const session = (state = null, action) => {
     }
 }
 
+const pagination = (state = { total: 1, page: 1 }, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'SET_CURRENT':
+            nuevoEstado.page = action.page;
+            return nuevoEstado;
+        case 'SET_TOTAL':
+            nuevoEstado.total = action.total;
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
+    pagination: pagination,
     form: formReducer
 });
 

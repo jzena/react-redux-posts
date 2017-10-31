@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Pagination from '../Pagination';
+
 
 //// Componente sin estado
 // const Home = (props) => {
@@ -55,6 +57,7 @@ class Home extends Component {
         return (
             <div>
                 <h2>Home desde el nuevo Componente</h2>
+                <Pagination />
                 {this.allPosts()}
             </div>
         )
