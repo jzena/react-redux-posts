@@ -2,6 +2,7 @@
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+[Demo](https://jzena.github.io/react-redux-posts/)
 
 ## Documentation
 - [redux](https://www.npmjs.com/package/redux)
