@@ -10,6 +10,8 @@ import Login from './Initial/Login';
 import Signup from './Initial/Signup';
 import Post from './Initial/Post';
 import AHeader from './Auth/AHeader';
+import AMisPosts from './Auth/AMisPosts';
+import ACrear from './Auth/ACrear';
 
 import { connect } from 'react-redux';
 
@@ -34,6 +36,8 @@ const App = (props) => {
                     <h2>auth</h2>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/post/:id" component={Post} />
+                    <Route path="/:user/posts" component={AMisPosts} />
+                    <Route path="/:user/crear" component={ACrear} />
                 </div>
             </Router>
         )

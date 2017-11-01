@@ -84,6 +84,20 @@ const errorPost = (state = null, action) => {
     }
 }
 
+const creado = (state = null, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'CREATED_':
+            nuevoEstado = "El post se creó con exito";
+            return nuevoEstado;
+        case 'ERROR_CREATED_':
+            nuevoEstado = "El post no se creó";
+            return nuevoEstado;
+        default:
+            return null;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
@@ -91,6 +105,7 @@ const reducer = combineReducers({
     login: session,
     showPost: showPost,
     errorPost: errorPost,
+    creado: creado,
     form: formReducer
 });
 
