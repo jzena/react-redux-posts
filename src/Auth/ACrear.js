@@ -9,7 +9,7 @@ const ACrear = (props) => {
         console.log(data);
         let jwt = props.login.jwt;
         let config = { 'Authorization': 'Bearer' + jwt }
-        axios.post('http://blog-api-u.herokuapp.com/v1/posts', {
+        axios.post('https://blog-api-u.herokuapp.com/v1/posts', {
             post: {
                 title: data.title,
                 body: data.body
