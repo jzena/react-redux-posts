@@ -12,6 +12,7 @@ import Post from './Initial/Post';
 import AHeader from './Auth/AHeader';
 import AMisPosts from './Auth/AMisPosts';
 import ACrear from './Auth/ACrear';
+import AEditar from './Auth/AEditar';
 
 import { connect } from 'react-redux';
 
@@ -38,7 +39,8 @@ const App = (props) => {
                     <Route exact path="/post/:id" component={Post} />
                     <Route path="/:user/posts" component={AMisPosts} />
                     <Route path="/:user/crear" component={ACrear} />
-                    <Route path="/:user/post/:id" component={Post} />
+                    <Route exact path="/:user/post/:id" component={Post} />
+                    <Route path="/:user/post/:id/editar" component={AEditar} />
                 </div>
             </Router>
         )

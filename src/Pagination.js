@@ -70,7 +70,7 @@ class Pagination extends Component {
         return (
             <div>
                 <h4>
-                    Paginación
+                    Página:
                     {this.props.pagina.page}
                 </h4>
                 {this.paginas()}

@@ -7,7 +7,7 @@ const allPosts = (state = [], action) => {
     switch (action.type) {
         case 'DATA_LOADED':
             // modificación del nuevo estado
-            nuevoEstado = state.concat(action.data);
+            nuevoEstado = action.data;
             return nuevoEstado;
         case 'CLEAR_DATA':
             nuevoEstado = [];
@@ -125,6 +125,48 @@ const errorPersonalPosts = (state = null, action) => {
     }
 }
 
+const editPost = (state = {}, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'GET_POST':
+            nuevoEstado = action.data;
+            return nuevoEstado;
+        case 'CLEAR_EDIT_POST':
+            nuevoEstado = {};
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
+const mensajeEditar = (state = null, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'EDITED':
+            nuevoEstado = "El post fué editado correctamente";
+            return nuevoEstado;
+        case 'ERROR_EDITED':
+            nuevoEstado = "Error, el post no fué editado";
+            return nuevoEstado;
+        default:
+            return null;
+    }
+}
+
+const mensajeEliminar = (state = null, action) => {
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'ELIMINATED':
+            nuevoEstado = "El post fue eliminado";
+            return nuevoEstado;
+        case 'ERROR_ELIMINATED':
+            nuevoEstado = "Error, el post no se eliminó";
+            return nuevoEstado;
+        default:
+            return null;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
@@ -135,6 +177,9 @@ const reducer = combineReducers({
     creado: creado,
     personalPosts: personalPosts,
     errorPersonalPosts: errorPersonalPosts,
+    editPost: editPost,
+    mensajeEditar: mensajeEditar,
+    mensajeEliminar: mensajeEliminar,
     form: formReducer
 });
 

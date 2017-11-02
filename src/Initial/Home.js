@@ -29,11 +29,11 @@ class Home extends Component {
         }
     }
     async componentDidMount() {
-        this.initialFetch();
+        this.initialFetch(this.props.pagination.page);
     }
 
-    async initialFetch() {
-        await this.props.dispatch1();
+    async initialFetch(page) {
+        await this.props.dispatch1(page);
         this.setState({ loading: false });
 
     }
@@ -42,12 +42,22 @@ class Home extends Component {
         this.props.clear();
     }
 
+    async componentWillReceiveProps(next_props) {
+        if (next_props.pagination.page != this.props.pagination.page) {
+            this.setState({ loading: true });
+            this.initialFetch(next_props.pagination.page);
+            console.log(next_props.pagination.page);
+            console.log(this.props.pagination.page);
+        }
+    }
+
+
     allPosts = () => {
         const Posts = this.props.allPosts.map((post) => {
             if ((this.props.login) && this.props.login.id == post.user_id) {
                 return (
                     <Link to={`/${post.user_id}/post/${post.id}`} key={post.id}>
-                        <h4 key={post.id}>{post.title}</h4>
+                        <h4>{post.title}</h4>
                     </Link>
                 )
             }
@@ -63,14 +73,15 @@ class Home extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return <h4>Loading...</h4>
-        }
+        // if (this.state.loading) {
+        //     return <h4>Loading...</h4>
+        // }
         return (
             <div>
                 <h2>Home desde el nuevo Componente</h2>
                 <Pagination />
-                {this.allPosts()}
+                {this.state.loading && <h4>Loading...</h4>}
+                {!(this.state.loading) && this.allPosts()}
             </div>
         )
     }
@@ -79,14 +90,15 @@ class Home extends Component {
 const mapStateToProps = (state) => {
     return {
         allPosts: state.allPosts,
-        login: state.login
+        login: state.login,
+        pagination: state.pagination
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatch1: async () => {
+        dispatch1: async (pagina) => {
             //dispatch(actionCreator)
-            await axios.get('https://blog-api-u.herokuapp.com/v1/posts')
+            await axios.get(`https://blog-api-u.herokuapp.com/v1/posts?page=${pagina}`)
                 .then(function (response) {
                     console.log(response);
                     dispatch({
