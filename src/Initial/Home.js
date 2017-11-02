@@ -44,11 +44,20 @@ class Home extends Component {
 
     allPosts = () => {
         const Posts = this.props.allPosts.map((post) => {
-            return (
-                <Link to={`/post/${post.id}`} key={post.id}>
-                    <h4 key={post.id}>{post.title}</h4>
-                </Link>
-            )
+            if ((this.props.login) && this.props.login.id == post.user_id) {
+                return (
+                    <Link to={`/${post.user_id}/post/${post.id}`} key={post.id}>
+                        <h4 key={post.id}>{post.title}</h4>
+                    </Link>
+                )
+            }
+            else {
+                return (
+                    <Link to={`/post/${post.id}`} key={post.id}>
+                        <h4 key={post.id}>{post.title}</h4>
+                    </Link>
+                )
+            }
         });
         return Posts;
     }
@@ -69,7 +78,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        allPosts: state.allPosts
+        allPosts: state.allPosts,
+        login: state.login
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -98,6 +98,33 @@ const creado = (state = null, action) => {
     }
 }
 
+const personalPosts = (state = [], action) => {
+    var nuevoEstado = Object.assign({}, state);
+
+    switch (action.type) {
+        case 'PERSONAL_POSTS':
+            nuevoEstado = action.data;
+            return nuevoEstado;
+        case 'CLEAR_PERSONAL_POST':
+            nuevoEstado = [];
+            return nuevoEstado;
+        default:
+            return state;
+    }
+}
+
+const errorPersonalPosts = (state = null, action) => {
+
+    var nuevoEstado = Object.assign({}, state);
+    switch (action.type) {
+        case 'ERROR_PERSONAL_POST':
+            nuevoEstado = 'No tienes posts o hubo un error al cargarlos';
+            return nuevoEstado;
+        default:
+            return null;
+    }
+}
+
 const reducer = combineReducers({
     allPosts: allPosts,
     userStatus: userCreated,
@@ -106,6 +133,8 @@ const reducer = combineReducers({
     showPost: showPost,
     errorPost: errorPost,
     creado: creado,
+    personalPosts: personalPosts,
+    errorPersonalPosts: errorPersonalPosts,
     form: formReducer
 });
 

@@ -38,6 +38,7 @@ const App = (props) => {
                     <Route exact path="/post/:id" component={Post} />
                     <Route path="/:user/posts" component={AMisPosts} />
                     <Route path="/:user/crear" component={ACrear} />
+                    <Route path="/:user/post/:id" component={Post} />
                 </div>
             </Router>
         )
